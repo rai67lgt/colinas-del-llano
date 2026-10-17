@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Información, proyectos y contacto del Complejo Educativo Colinas del Llano, en Barinas.">
+    <title>L.B. "Colinas del Llano" - Ciudad Varyná, Barinas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+        }
+
+        /* Encabezado Principal */
+        header {
+            background-color: #1b365d;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #d1e3ff;
+        }
+
+        /* Menú de Navegación */
+        nav {
+            background-color: #0b1d3a;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 5px 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            border-radius: 4px;
+        }
+
+        nav button:hover {
+            color: #4da6ff;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        nav button.active {
+            background-color: #008cba;
+            color: white;
+        }
+
+        /* Contenedores de Secciones (Pestañas) */
+        .tab-content {
+            display: none; /* Se ocultan por defecto y JS muestra la activa */
+            max-width: 950px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab-content.active {
+            display: block; /* Muestra solo la sección seleccionada */
+        }
+
+        /* Estilos de títulos y tarjetas */
+        h2 {
+            color: #1b365d;
+            border-bottom: 2px solid #008cba;
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #0b1d3a;
+            margin-top: 20px;
+        }
+
+        /* Tarjetas de Directiva y Departamentos */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #008cba;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .card h4 {
+            margin: 0 0 5px 0;
+            color: #1b365d;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+        /* Listas e Insumos */
+        ul {
+            line-height: 1.6;
+        }
+
+        /* Botón de Contacto */
+        .btn-contacto {
+            background-color: #008cba;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-contacto:hover {
+            background-color: #00688b;
+        }
+
+        /* Formulario de Consulta */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* Pie de página */
+        footer {
+            text-align: center;
+            padding: 18px;
+            background-color: #18342c;
+            color: white;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+
+        :root {
+            --ink: #18342c;
+            --muted: #5d7068;
+            --paper: #f8f8f3;
+            --green: #175c45;
+            --lime: #d8e66b;
+            --coral: #c85440;
+            --line: #dce2d8;
+            --serif: "Fraunces", Georgia, serif;
+            --sans: "DM Sans", sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+        body { background: var(--paper); color: var(--ink); font-family: var(--sans); line-height: 1.6; }
+        body::before { display: block; height: 5px; background: var(--lime); content: ""; }
+        header { padding: 34px 20px; background: var(--green); }
+        header h1 { max-width: 1000px; margin: 0 auto; color: white; font: 500 42px/1.08 var(--serif); text-transform: none; }
+        header p { max-width: 1000px; margin: 10px auto 0; color: #e0e9dc; font-size: 13px; }
+        .zoom-controls { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 18px auto 0; }
+        .zoom-controls button { min-width: 38px; min-height: 36px; border: 1px solid rgb(255 255 255 / 45%); background: transparent; color: white; font: 600 16px var(--sans); cursor: pointer; }
+        .zoom-controls button:hover { background: rgb(255 255 255 / 12%); }
+        .zoom-controls output { min-width: 48px; color: white; font-size: 11px; font-weight: 700; }
+        .zoom-controls .zoom-reset { min-width: 54px; font-size: 11px; }
+        nav { justify-content: flex-start; gap: 4px; padding: 7px max(18px, calc((100% - 1000px) / 2)); background: var(--ink); }
+        nav button { min-height: 43px; padding: 10px 15px; border-radius: 0; color: white; font: 600 12px var(--sans); }
+        nav button:hover { background: rgb(255 255 255 / 8%); color: var(--lime); }
+        nav button.active { background: var(--lime); color: var(--ink); }
+        nav button:focus-visible, .btn-contacto:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+        .tab-content { width: min(1000px, calc(100% - 48px)); max-width: none; min-height: 420px; margin: 0 auto; padding: 58px 0 72px; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
+        .tab-content[hidden] { display: none !important; }
+        h2 { margin-bottom: 23px; border: 0; color: var(--ink); font: 500 38px/1.13 var(--serif); }
+        h3 { margin-top: 25px; color: var(--green); font: 500 23px/1.2 var(--serif); }
+        p, li { font-size: 14px; }
+        ul { padding-left: 20px; color: var(--muted); }
+        li { padding: 3px 0; }
+        li::marker { color: var(--coral); }
+
+        .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; border-top: 1px solid var(--line); }
+        .card { padding: 22px 18px 22px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+        .card:nth-child(3n + 2), .card:nth-child(3n + 3) { padding-left: 18px; border-left: 1px solid var(--line); }
+        .card h4 { margin: 0 0 8px; color: var(--green); font: 500 19px/1.2 var(--serif); }
+        .card p { color: var(--muted); font-size: 12px; }
+        .section-note, .form-note { color: var(--muted); font-size: 12px; }
+
+        .news-list { border-top: 1px solid var(--line); }
+        .news-item { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 19px 0; border-bottom: 1px solid var(--line); }
+        .news-date { color: var(--coral); font-size: 10px; font-weight: 700; }
+        .news-item h3 { margin: 0 0 6px; font-size: 21px; }
+        .news-item p { margin: 0 0 7px; color: var(--muted); font-size: 12px; }
+        .news-item a, .contact-links a { color: var(--green); font-size: 11px; font-weight: 700; text-underline-offset: 4px; }
+
+        .contact-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 54px; }
+        .contact-links { display: grid; gap: 12px; align-content: start; margin-top: 22px; }
+        .contact-links a { font-size: 13px; }
+        .form-group label { color: var(--ink); font-size: 12px; }
+        .form-group input, .form-group textarea, .form-group select { border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink); font: 13px var(--sans); }
+        .btn-contacto { border-radius: 0; background: var(--green); font: 700 12px var(--sans); }
+        .btn-contacto:hover { background: #104b38; }
+        .form-note { margin-top: 12px; }
+        .schedule-tools { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin: 24px 0 18px; }
+        .schedule-tools label { display: grid; gap: 5px; color: var(--muted); font-size: 11px; font-weight: 700; }
+        .schedule-tools select, .schedule-tools input, .schedule-tools button, .quiz-start input, .quiz-start button, .quiz-next, .quiz-restart, .quiz-answer { min-height: 40px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink); font: 600 12px var(--sans); }
+        .schedule-tools select, .schedule-tools input { min-width: 145px; }
+        .schedule-tools button, .quiz-start button, .quiz-next, .quiz-restart { border-color: var(--green); background: var(--green); color: white; cursor: pointer; }
+        .schedule-tools button:hover, .quiz-start button:hover, .quiz-next:hover, .quiz-restart:hover { background: #104b38; }
+        .schedule-tools .delete-cycle { border-color: var(--coral); background: transparent; color: var(--coral); }
+        .schedule-table-wrap, .leaderboard-wrap { overflow-x: auto; border-top: 1px solid var(--line); }
+        .schedule-table, .leaderboard-table { width: 100%; min-width: 690px; border-collapse: collapse; text-align: left; font-size: 12px; }
+        .schedule-table thead, .leaderboard-table thead { background: var(--green); color: white; }
+        .schedule-table th, .schedule-table td, .leaderboard-table th, .leaderboard-table td { padding: 11px 12px; border-bottom: 1px solid var(--line); }
+        .schedule-table input, .schedule-table select { width: 100%; min-width: 95px; min-height: 38px; padding: 8px; border: 1px solid var(--line); background: white; color: var(--ink); font: 12px var(--sans); }
+        .schedule-table .remove-row { border: 0; background: transparent; color: var(--coral); font: 700 12px var(--sans); cursor: pointer; }
+        .schedule-status { min-height: 22px; margin-top: 12px; color: var(--muted); font-size: 12px; }
+        .hygiene-list { margin: 25px 0 45px; padding: 0; border-top: 1px solid var(--line); list-style: none; }
+        .hygiene-list li { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+        .hygiene-list strong { color: var(--coral); }
+        .quiz-panel { margin-top: 22px; padding: 24px; border-left: 3px solid var(--green); background: #edf1e7; }
+        .quiz-start { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+        .quiz-start label { display: grid; flex: 1 1 220px; gap: 5px; color: var(--ink); font-size: 12px; font-weight: 700; }
+        .quiz-start input { width: 100%; }
+        .quiz-progress { color: var(--coral); font-size: 11px; font-weight: 700; }
+        .quiz-question { margin: 8px 0 17px; font: 500 24px/1.2 var(--serif); }
+        .quiz-options { display: grid; gap: 8px; }
+        .quiz-answer { width: 100%; text-align: left; cursor: pointer; }
+        .quiz-answer:hover:not(:disabled) { border-color: var(--green); background: white; }
+        .quiz-answer:disabled { cursor: default; opacity: 1; }
+        .quiz-answer.correct { border-color: var(--green); background: #dcebdc; }
+        .quiz-answer.incorrect { border-color: var(--coral); background: #f5e3dc; }
+        .quiz-feedback { min-height: 24px; margin: 12px 0; color: var(--ink); font-size: 12px; }
+        .quiz-result { margin-bottom: 16px; font: 500 22px var(--serif); }
+        .leaderboard { margin-top: 45px; }
+        .leaderboard h3 { margin-bottom: 17px; }
+        .leaderboard-note { color: var(--muted); font-size: 11px; }
+        footer { margin-top: 0; padding: 21px; }
+        footer p { margin: 0; color: #d6e2d8; font-size: 11px; }
+
+        @media (max-width: 700px) {
+            header { padding: 27px 20px; }
+            header h1 { font-size: 34px; }
+            .zoom-controls { margin-top: 14px; }
+            nav { gap: 2px; padding: 6px 10px; overflow-x: auto; }
+            nav button { flex: 0 0 auto; padding: 10px 12px; font-size: 11px; }
+            .tab-content { width: calc(100% - 36px); min-height: 0; padding: 42px 0 54px; }
+            h2 { font-size: 32px; }
+            .card-grid { grid-template-columns: 1fr; }
+            .card, .card:nth-child(3n + 2), .card:nth-child(3n + 3) { padding: 18px 0; border-left: 0; }
+            .contact-layout { grid-template-columns: 1fr; gap: 28px; }
+            .news-item { grid-template-columns: 1fr; gap: 5px; }
+            .schedule-tools { align-items: stretch; flex-direction: column; }
+            .schedule-tools select, .schedule-tools input, .schedule-tools button { width: 100%; }
+            .quiz-panel { padding: 18px; }
+            .quiz-start { align-items: stretch; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+        <h1>Liceo Bolivariano "Colinas del Llano"</h1>
+        <p>Ciudad Varyná · Alto Barinas · Estado Barinas</p>
+        <div class="zoom-controls" role="group" aria-label="Controles de tamaño de página">
+            <button id="zoom-out" type="button" aria-label="Reducir tamaño de página" title="Reducir">−</button>
+            <output id="zoom-value" aria-live="polite">100%</output>
+            <button id="zoom-in" type="button" aria-label="Aumentar tamaño de página" title="Aumentar">+</button>
+            <button id="zoom-reset" class="zoom-reset" type="button" aria-label="Restablecer tamaño de página" title="Restablecer">100%</button>
+        </div>
+    </header>
+
+    <!-- Menú de Navegación por Pestañas (Sin desplazarse) -->
+    <nav role="tablist" aria-label="Secciones del liceo">
+        <button id="tab-inicio" type="button" role="tab" aria-selected="true" aria-controls="inicio" class="nav-btn active" onclick="openTab(event, 'inicio')">Inicio</button>
+        <button id="tab-nosotros" type="button" role="tab" aria-selected="false" aria-controls="nosotros" class="nav-btn" onclick="openTab(event, 'nosotros')">Nosotros</button>
+        <button id="tab-directiva" type="button" role="tab" aria-selected="false" aria-controls="directiva" class="nav-btn" onclick="openTab(event, 'directiva')">Directiva y departamentos</button>
+        <button id="tab-horarios" type="button" role="tab" aria-selected="false" aria-controls="horarios" class="nav-btn" onclick="openTab(event, 'horarios')">Años y secciones</button>
+        <button id="tab-noticias" type="button" role="tab" aria-selected="false" aria-controls="noticias" class="nav-btn" onclick="openTab(event, 'noticias')">Anuncios y proyectos</button>
+        <button id="tab-higiene" type="button" role="tab" aria-selected="false" aria-controls="higiene" class="nav-btn" onclick="openTab(event, 'higiene')">Higiene</button>
+        <button id="tab-contacto" type="button" role="tab" aria-selected="false" aria-controls="contacto" class="nav-btn" onclick="openTab(event, 'contacto')">Contacto</button>
+    </nav>
+
+    <!-- 1. SECCIÓN: INICIO -->
+    <main id="page-content">
+    <div id="inicio" class="tab-content active" role="tabpanel" aria-labelledby="tab-inicio">
+        <p class="eyebrow">Comunidad educativa · Barinas</p>
+        <h2>Un liceo que aprende junto a su comunidad.</h2>
+        <p>El Complejo Educativo Colinas del Llano acompaña la formación de jóvenes de Ciudad Varyná y sectores cercanos. Este portal reúne información del plantel, proyectos estudiantiles y canales de contacto para las familias.</p>
+
+        <h3>Información del plantel</h3>
+        <ul>
+            <li><strong>Ubicación:</strong> Urbanización Ciudad Varyná, parroquia Alto Barinas.</li>
+            <li><strong>Nivel:</strong> Educación Media General, de 1.º a 5.º año.</li>
+            <li><strong>Dependencia:</strong> Institución pública.</li>
+        </ul>
+        <p class="section-note">Información recopilada de los perfiles públicos del plantel. Confirma horarios y trámites directamente con la institución.</p>
+    </div>
+
+    <!-- 2. SECCIÓN: NOSOTROS -->
+    <div id="nosotros" class="tab-content" role="tabpanel" aria-labelledby="tab-nosotros" hidden>
+        <p class="eyebrow">Quiénes somos</p>
+        <h2>Formación y comunidad en Ciudad Varyná.</h2>
+        <p>El Complejo Educativo Colinas del Llano está ubicado en Ciudad Varyná, parroquia Alto Barinas, estado Barinas. Atiende a estudiantes de Educación Media General y promueve la participación de familias y comunidad en la vida escolar.</p>
+
+        <h3>Misión</h3>
+        <p>Fomentar el pensamiento crítico y la capacidad de análisis a través de la lectura y el periódico escolar.</p>
+
+        <h3>Visión</h3>
+        <p>Formar estudiantes autónomos, críticos y capaces de comunicar sus ideas y conocimientos.</p>
+        <p class="section-note">Misión y visión resumidas a partir de información pública del perfil institucional; confirma su redacción vigente con el plantel.</p>
+    </div>
+
+    <!-- 3. SECCIÓN: DIRECTIVA Y DEPARTAMENTOS -->
+    <div id="directiva" class="tab-content" role="tabpanel" aria-labelledby="tab-directiva" hidden>
+        <p class="eyebrow">Organización escolar</p>
+        <h2>Directiva y departamentos</h2>
+        <p>Estas áreas acompañan la gestión académica y la atención de estudiantes y familias.</p>
+        <p class="section-note">No encontré nombres actuales confirmables en las fuentes públicas consultadas. Los cargos se muestran sin nombres para evitar publicar datos incorrectos.</p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h4>Dirección del Plantel</h4>
+                <p>Gestión institucional, toma de decisiones ejecutivas y representación legal del colegio ante la Zona Educativa de Barinas.</p>
+            </div>
+            <div class="card">
+                <h4>Subdirección Académica</h4>
+                <p>Planificación de contenidos, supervisión pedagógica docentes y coordinación de planes de estudio de 1º a 5º año.</p>
+            </div>
+            <div class="card">
+                <h4>Control de Estudios y Evaluación</h4>
+                <p>Registro de notas, emisión de boletines, certificaciones de estudio y seguimiento del proyecto de grado.</p>
+            </div>
+            <div class="card">
+                <h4>Departamento de Orientación</h4>
+                <p>Acompañamiento psicopedagógico, atención al estudiante, canalización de acuerdos de convivencia y relación con representantes.</p>
+            </div>
+            <div class="card">
+                <h4>Coordinación de 5to Año</h4>
+                <p>Supervisión directa de las promociones salientes, control de proyectos comunitarios de investigación y trámites para la universidad.</p>
+            </div>
+            <div class="card">
+                <h4>Vocería Estudiantil (OBE)</h4>
+                <p>Representación de los derechos, actividades culturales, deportivas y proyectos liderados por la comunidad estudiantil.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ciclos escolares y horarios editables -->
+    <div id="horarios" class="tab-content" role="tabpanel" aria-labelledby="tab-horarios" hidden>
+        <p class="eyebrow">Organización por ciclo escolar</p>
+        <h2>Años, secciones y horarios</h2>
+        <p>Elige un ciclo para editar sus horarios. Cada ciclo empieza vacío y se guarda por separado, así puedes preparar el siguiente año sin mezclar los horarios anteriores.</p>
+
+        <div class="schedule-tools">
+            <label for="school-year">Ciclo escolar
+                <select id="school-year">
+                    <option value="2025-2026">2025-2026</option>
+                    <option value="2026-2027" selected>2026-2027</option>
+                </select>
+            </label>
+            <label for="new-school-year">Agregar ciclo
+                <input id="new-school-year" type="text" inputmode="numeric" placeholder="2027-2028" aria-label="Nuevo ciclo escolar, formato 2027-2028">
+            </label>
+            <button id="add-school-year" type="button">Crear ciclo</button>
+            <button id="add-schedule-row" type="button">Agregar sección</button>
+            <button id="save-schedule" type="button">Guardar horarios</button>
+            <button id="clear-schedule" class="delete-cycle" type="button">Vaciar este ciclo</button>
+        </div>
+
+        <div class="schedule-table-wrap" role="region" aria-label="Tabla editable de horarios" tabindex="0">
+            <table class="schedule-table">
+                <thead><tr><th scope="col">Año</th><th scope="col">Sección</th><th scope="col">Turno</th><th scope="col">Entrada</th><th scope="col">Salida</th><th scope="col">Acción</th></tr></thead>
+                <tbody id="schedule-rows"></tbody>
+            </table>
+        </div>
+        <p id="schedule-status" class="schedule-status" aria-live="polite">Los horarios se guardan solo en este navegador.</p>
+    </div>
+
+    <!-- 4. SECCIÓN: ANUNCIOS Y NOTICIAS -->
+    <div id="noticias" class="tab-content" role="tabpanel" aria-labelledby="tab-noticias" hidden>
+        <p class="eyebrow">Publicaciones localizadas · 2026</p>
+        <h2>Anuncios y proyectos recientes</h2>
+        <p>Estas son algunas actividades publicadas entre febrero y mayo de 2026. Consulta las fuentes enlazadas para ver los avisos originales.</p>
+
+        <div class="news-list">
+            <article class="news-item">
+                <time class="news-date" datetime="2026-05-21">21 MAY 2026</time>
+                <div><h3>Deshidratador solar casero</h3><p>Proyecto de 5.º año sobre conservación de alimentos y apoyo al Programa de Alimentación Escolar.</p><a href="https://www.instagram.com/p/DYnVuWny2rw/" target="_blank" rel="noopener noreferrer">Fuente: TV Calle Barinas</a></div>
+            </article>
+            <article class="news-item">
+                <time class="news-date" datetime="2026-03-29">29 MAR 2026</time>
+                <div><h3>Encuentro de Corazones</h3><p>Estudiantes de 4.º año, secciones C y D, compartieron una jornada con personas mayores en el geriátrico de Barinas.</p><a href="https://www.instagram.com/p/DWeI0P6lYd_/" target="_blank" rel="noopener noreferrer">Fuente: cuenta institucional</a></div>
+            </article>
+            <article class="news-item">
+                <time class="news-date" datetime="2026-02-25">25 FEB 2026</time>
+                <div><h3>Proyecto “Gótica de Amor”</h3><p>Trabajo comunitario para dar color a las paredes del complejo educativo.</p><a href="https://www.instagram.com/ce_colinas/reel/DVM-bBfDGfR/" target="_blank" rel="noopener noreferrer">Fuente: @ce_colinas</a></div>
+            </article>
+        </div>
+        <p class="section-note">Son las publicaciones recientes que pude verificar; no sustituyen los comunicados oficiales vigentes.</p>
+    </div>
+
+    <!-- Higiene y quiz interactivo -->
+    <div id="higiene" class="tab-content" role="tabpanel" aria-labelledby="tab-higiene" hidden>
+        <p class="eyebrow">Bienestar en la comunidad</p>
+        <h2>Higiene y cuidado diario</h2>
+        <p>Pequeños hábitos ayudan a cuidar nuestro bienestar y los espacios que compartimos.</p>
+        <ul class="hygiene-list">
+            <li><strong>01</strong><span>Lávate las manos con agua y jabón durante al menos 20 segundos, especialmente antes de comer y después de ir al baño.</span></li>
+            <li><strong>02</strong><span>Cúbrete al toser o estornudar con el codo o un pañuelo; luego lávate las manos.</span></li>
+            <li><strong>03</strong><span>Cepíllate los dientes por la mañana y antes de dormir. No compartas tu cepillo dental.</span></li>
+            <li><strong>04</strong><span>Mantén limpios tus útiles y espacios; no compartas vasos ni objetos personales de aseo.</span></li>
+        </ul>
+
+        <h3>Quiz de higiene</h3>
+        <p>Lee las reglas y pon a prueba lo aprendido. Cada respuesta correcta suma un punto.</p>
+        <div class="quiz-panel">
+            <form id="quiz-start" class="quiz-start">
+                <label for="quiz-name">Escribe tu nombre para comenzar
+                    <input id="quiz-name" name="name" type="text" maxlength="32" autocomplete="name" required placeholder="Tu nombre">
+                </label>
+                <button type="submit">Iniciar quiz</button>
+            </form>
+            <div id="quiz-game" hidden>
+                <p id="quiz-progress" class="quiz-progress"></p>
+                <h4 id="quiz-question" class="quiz-question"></h4>
+                <div id="quiz-options" class="quiz-options"></div>
+                <p id="quiz-feedback" class="quiz-feedback" aria-live="polite"></p>
+                <button id="quiz-next" class="quiz-next" type="button" hidden>Siguiente pregunta</button>
+            </div>
+            <div id="quiz-result-panel" hidden>
+                <p id="quiz-result" class="quiz-result" aria-live="polite"></p>
+                <button id="quiz-restart" class="quiz-restart" type="button">Jugar otra vez</button>
+            </div>
+        </div>
+
+        <section class="leaderboard" aria-labelledby="leaderboard-title">
+            <h3 id="leaderboard-title">Tabla de puntajes</h3>
+            <div class="leaderboard-wrap" role="region" aria-label="Mejores puntajes del quiz" tabindex="0">
+                <table class="leaderboard-table">
+                    <thead><tr><th scope="col">Puesto</th><th scope="col">Nombre</th><th scope="col">Puntos</th><th scope="col">Fecha</th></tr></thead>
+                    <tbody id="leaderboard-rows"></tbody>
+                </table>
+            </div>
+            <p class="leaderboard-note">Los puntajes se guardan únicamente en este navegador y dispositivo.</p>
+        </section>
+    </div>
+
+    <!-- 5. SECCIÓN: CONTACTO -->
+    <div id="contacto" class="tab-content" role="tabpanel" aria-labelledby="tab-contacto" hidden>
+        <p class="eyebrow">Atención a familias y comunidad</p>
+        <h2>Contacto y consultas</h2>
+        <div class="contact-layout">
+            <div>
+                <p>Escribe al correo público del plantel o completa el formulario para preparar un mensaje en Gmail.</p>
+                <div class="contact-links">
+                    <a href="mailto:liceocolinas@gmail.com">liceocolinas@gmail.com</a>
+                    <a href="https://wa.me/584143176731" target="_blank" rel="noopener noreferrer">WhatsApp institucional: +58 414-3176731</a>
+                    <a href="https://www.instagram.com/ce_colinas/" target="_blank" rel="noopener noreferrer">Instagram: @ce_colinas</a>
+                </div>
+            </div>
+            <form id="contact-form">
+            <div class="form-group">
+                <label for="nombre">¿Cómo te llamas?</label>
+                <input id="nombre" name="nombre" type="text" required autocomplete="name" placeholder="Nombre y apellido">
+            </div>
+            <div class="form-group">
+                <label for="relacion">¿Quién eres?</label>
+                <select id="relacion" name="relacion" required>
+                    <option value="" selected disabled>Selecciona una opción</option>
+                    <option>Estudiante</option>
+                    <option>Representante</option>
+                    <option>Docente o personal</option>
+                    <option>Miembro de la comunidad</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="correo">Tu correo para responderte (opcional)</label>
+                <input id="correo" name="correo" type="email" autocomplete="email" placeholder="nombre@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="motivo">Motivo de la consulta</label>
+                <input id="motivo" name="motivo" type="text" required placeholder="Inscripción, estudios, actividades...">
+            </div>
+            <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Escribe tu consulta"></textarea>
+            </div>
+            <button type="submit" class="btn-contacto">Preparar correo en Gmail</button>
+            <p class="form-note">Se abrirá un borrador dirigido a liceocolinas@gmail.com. Revísalo y pulsa “Enviar” en Gmail; esta página no envía mensajes automáticamente.</p>
+            </form>
+        </div>
+    </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 Complejo Educativo Colinas del Llano · Ciudad Varyná, Barinas</p>
+    </footer>
+
+    <!-- Script para cambiar de apartado sin desplazarse (Navegación por Pestañas) -->
+    <script>
+        var pageZoom = 100;
+
+        function setPageZoom(value) {
+            pageZoom = Math.min(160, Math.max(80, value));
+            document.getElementById("page-content").style.zoom = pageZoom + "%";
+            document.getElementById("zoom-value").textContent = pageZoom + "%";
+        }
+
+        document.getElementById("zoom-out").addEventListener("click", function () {
+            setPageZoom(pageZoom - 10);
+        });
+
+        document.getElementById("zoom-in").addEventListener("click", function () {
+            setPageZoom(pageZoom + 10);
+        });
+
+        document.getElementById("zoom-reset").addEventListener("click", function () {
+            setPageZoom(100);
+        });
+
+        function openTab(evt, tabName) {
+            // 1. Oculta todos los elementos con la clase "tab-content"
+            var tabContent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContent.length; i++) {
+                tabContent[i].classList.remove("active");
+                tabContent[i].hidden = true;
+            }
+
+            // 2. Quita la clase "active" de todos los botones de navegación
+            var navBtns = document.getElementsByClassName("nav-btn");
+            for (var i = 0; i < navBtns.length; i++) {
+                navBtns[i].classList.remove("active");
+                navBtns[i].setAttribute("aria-selected", "false");
+            }
+
+            // 3. Muestra la pestaña actual y añade la clase "active" al botón presionado
+            document.getElementById(tabName).classList.add("active");
+            document.getElementById(tabName).hidden = false;
+            evt.currentTarget.classList.add("active");
+            evt.currentTarget.setAttribute("aria-selected", "true");
+        }
+
+        var scheduleStorageKey = "colinasSchedulesByYear";
+        var scheduleYear = document.getElementById("school-year");
+        var scheduleRows = document.getElementById("schedule-rows");
+        var scheduleStatus = document.getElementById("schedule-status");
+        var schedulesByYear = {};
+
+        try {
+            schedulesByYear = JSON.parse(localStorage.getItem(scheduleStorageKey) || "{}") || {};
+        } catch (error) {
+            scheduleStatus.textContent = "No se pudo leer el almacenamiento local de horarios.";
+        }
+
+        function makeScheduleRow(values) {
+            var row = document.createElement("tr");
+            var fields = [
+                { key: "grade", label: "Año o curso", placeholder: "1.º año", type: "text" },
+                { key: "section", label: "Sección", placeholder: "A", type: "text" },
+                { key: "shift", label: "Turno", placeholder: "Mañana", type: "text" },
+                { key: "start", label: "Hora de entrada", type: "time" },
+                { key: "end", label: "Hora de salida", type: "time" }
+            ];
+
+            fields.forEach(function (field) {
+                var cell = document.createElement("td");
+                var input = document.createElement("input");
+                input.type = field.type;
+                input.value = values[field.key] || "";
+                input.setAttribute("aria-label", field.label);
+                input.required = true;
+                if (field.placeholder) input.placeholder = field.placeholder;
+                cell.appendChild(input);
+                row.appendChild(cell);
+            });
+
+            var actionCell = document.createElement("td");
+            var removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.className = "remove-row";
+            removeButton.textContent = "Quitar";
+            removeButton.setAttribute("aria-label", "Quitar esta sección");
+            removeButton.addEventListener("click", function () { row.remove(); });
+            actionCell.appendChild(removeButton);
+            row.appendChild(actionCell);
+            return row;
+        }
+
+        function renderSchedules() {
+            scheduleRows.replaceChildren();
+            var yearSchedules = schedulesByYear[scheduleYear.value] || [];
+            if (yearSchedules.length === 0) {
+                var emptyRow = document.createElement("tr");
+                var emptyCell = document.createElement("td");
+                emptyCell.colSpan = 6;
+                emptyCell.textContent = "No hay horarios para este ciclo. Usa “Agregar sección” para comenzar.";
+                emptyRow.appendChild(emptyCell);
+                scheduleRows.appendChild(emptyRow);
+                return;
+            }
+            yearSchedules.forEach(function (item) { scheduleRows.appendChild(makeScheduleRow(item)); });
+        }
+
+        scheduleYear.addEventListener("change", renderSchedules);
+        document.getElementById("add-schedule-row").addEventListener("click", function () {
+            scheduleRows.appendChild(makeScheduleRow({}));
+            scheduleStatus.textContent = "Completa la fila y pulsa “Guardar horarios”.";
+        });
+        document.getElementById("save-schedule").addEventListener("click", function () {
+            var rows = Array.from(scheduleRows.querySelectorAll("tr"));
+            var newSchedule = [];
+            for (var i = 0; i < rows.length; i++) {
+                var inputs = Array.from(rows[i].querySelectorAll("input"));
+                if (inputs.length === 0) continue;
+                if (inputs.some(function (input) { return !input.value.trim(); })) {
+                    scheduleStatus.textContent = "Completa todos los campos de cada fila antes de guardar.";
+                    inputs.find(function (input) { return !input.value.trim(); }).focus();
+                    return;
+                }
+                newSchedule.push({ grade: inputs[0].value.trim(), section: inputs[1].value.trim(), shift: inputs[2].value.trim(), start: inputs[3].value, end: inputs[4].value });
+            }
+            schedulesByYear[scheduleYear.value] = newSchedule;
+            try {
+                localStorage.setItem(scheduleStorageKey, JSON.stringify(schedulesByYear));
+                scheduleStatus.textContent = "Horarios guardados para el ciclo " + scheduleYear.value + " en este navegador.";
+                renderSchedules();
+            } catch (error) {
+                scheduleStatus.textContent = "No se pudieron guardar. Revisa el almacenamiento del navegador.";
+            }
+        });
+        document.getElementById("add-school-year").addEventListener("click", function () {
+            var newYearInput = document.getElementById("new-school-year");
+            var newYear = newYearInput.value.trim();
+            if (!/^\d{4}-\d{4}$/.test(newYear)) {
+                scheduleStatus.textContent = "Escribe el ciclo con formato 2027-2028.";
+                newYearInput.focus();
+                return;
+            }
+            if (!Array.from(scheduleYear.options).some(function (option) { return option.value === newYear; })) {
+                var option = document.createElement("option");
+                option.value = newYear;
+                option.textContent = newYear;
+                scheduleYear.appendChild(option);
+            }
+            if (!schedulesByYear[newYear]) schedulesByYear[newYear] = [];
+            scheduleYear.value = newYear;
+            newYearInput.value = "";
+            try { localStorage.setItem(scheduleStorageKey, JSON.stringify(schedulesByYear)); } catch (error) { }
+            scheduleStatus.textContent = "Ciclo " + newYear + " creado vacío. Agrega sus horarios.";
+            renderSchedules();
+        });
+        document.getElementById("clear-schedule").addEventListener("click", function () {
+            if (!window.confirm("¿Vaciar todos los horarios del ciclo " + scheduleYear.value + "?")) return;
+            schedulesByYear[scheduleYear.value] = [];
+            try { localStorage.setItem(scheduleStorageKey, JSON.stringify(schedulesByYear)); } catch (error) { }
+            scheduleStatus.textContent = "Se vaciaron los horarios del ciclo " + scheduleYear.value + ".";
+            renderSchedules();
+        });
+        renderSchedules();
+
+        var hygieneQuestions = [
+            { question: "¿Cuánto tiempo debes frotarte las manos con agua y jabón?", answers: ["5 segundos", "Al menos 20 segundos", "Solo hasta que se mojen"], correct: 1 },
+            { question: "¿Cuándo es importante lavarse las manos?", answers: ["Antes de comer y después de ir al baño", "Solo al llegar a casa", "Una vez por semana"], correct: 0 },
+            { question: "¿Cómo debes cubrirte al toser o estornudar?", answers: ["Con la mano y seguir la actividad", "Con el codo o un pañuelo", "No hace falta cubrirse"], correct: 1 },
+            { question: "¿Qué debes hacer con tu cepillo dental?", answers: ["Compartirlo con un amigo", "Enjuagarlo y guardarlo limpio, sin compartirlo", "Dejarlo en cualquier lugar"], correct: 1 },
+            { question: "¿Qué objetos personales es mejor no compartir?", answers: ["Vasos y objetos de aseo", "Libros de clase", "Lápices del aula"], correct: 0 }
+        ];
+        var quizStart = document.getElementById("quiz-start");
+        var quizGame = document.getElementById("quiz-game");
+        var quizResultPanel = document.getElementById("quiz-result-panel");
+        var quizIndex = 0;
+        var quizScore = 0;
+        var quizPlayer = "";
+        var quizAnswered = false;
+        var leaderboardKey = "colinasHygieneQuizScores";
+
+        function showQuizQuestion() {
+            var item = hygieneQuestions[quizIndex];
+            quizAnswered = false;
+            document.getElementById("quiz-progress").textContent = "Pregunta " + (quizIndex + 1) + " de " + hygieneQuestions.length;
+            document.getElementById("quiz-question").textContent = item.question;
+            document.getElementById("quiz-feedback").textContent = "";
+            var options = document.getElementById("quiz-options");
+            options.replaceChildren();
+            item.answers.forEach(function (answer, index) {
+                var button = document.createElement("button");
+                button.type = "button";
+                button.className = "quiz-answer";
+                button.textContent = answer;
+                button.addEventListener("click", function () {
+                    if (quizAnswered) return;
+                    quizAnswered = true;
+                    Array.from(options.children).forEach(function (option) { option.disabled = true; });
+                    if (index === item.correct) {
+                        quizScore += 1;
+                        button.classList.add("correct");
+                        document.getElementById("quiz-feedback").textContent = "¡Correcto!";
+                    } else {
+                        options.children[item.correct].classList.add("correct");
+                        button.classList.add("incorrect");
+                        document.getElementById("quiz-feedback").textContent = "Revisa las reglas de higiene y sigue con la siguiente.";
+                    }
+                    var nextButton = document.getElementById("quiz-next");
+                    nextButton.textContent = quizIndex === hygieneQuestions.length - 1 ? "Ver resultado" : "Siguiente pregunta";
+                    nextButton.hidden = false;
+                });
+                options.appendChild(button);
+            });
+            document.getElementById("quiz-next").hidden = true;
+        }
+
+        function updateLeaderboard() {
+            var scores = [];
+            try { scores = JSON.parse(localStorage.getItem(leaderboardKey) || "[]") || []; } catch (error) { scores = []; }
+            scores.sort(function (a, b) { return b.points - a.points || a.date.localeCompare(b.date); });
+            var body = document.getElementById("leaderboard-rows");
+            body.replaceChildren();
+            if (scores.length === 0) {
+                var emptyRow = document.createElement("tr");
+                var emptyCell = document.createElement("td");
+                emptyCell.colSpan = 4;
+                emptyCell.textContent = "Todavía no hay puntajes. ¡Inicia el quiz!";
+                emptyRow.appendChild(emptyCell);
+                body.appendChild(emptyRow);
+                return;
+            }
+            scores.slice(0, 10).forEach(function (entry, index) {
+                var row = document.createElement("tr");
+                [index + 1, entry.name, entry.points + " / " + hygieneQuestions.length, new Date(entry.date).toLocaleDateString("es")].forEach(function (value) {
+                    var cell = document.createElement("td");
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                body.appendChild(row);
+            });
+        }
+
+        quizStart.addEventListener("submit", function (event) {
+            event.preventDefault();
+            quizPlayer = document.getElementById("quiz-name").value.trim();
+            if (!quizPlayer) return;
+            quizIndex = 0;
+            quizScore = 0;
+            quizStart.hidden = true;
+            quizResultPanel.hidden = true;
+            quizGame.hidden = false;
+            showQuizQuestion();
+        });
+
+        document.getElementById("quiz-next").addEventListener("click", function () {
+            quizIndex += 1;
+            if (quizIndex < hygieneQuestions.length) {
+                showQuizQuestion();
+                return;
+            }
+            var scores = [];
+            try { scores = JSON.parse(localStorage.getItem(leaderboardKey) || "[]") || []; } catch (error) { scores = []; }
+            scores.push({ name: quizPlayer, points: quizScore, date: new Date().toISOString() });
+            scores.sort(function (a, b) { return b.points - a.points || a.date.localeCompare(b.date); });
+            try { localStorage.setItem(leaderboardKey, JSON.stringify(scores.slice(0, 50))); } catch (error) { }
+            quizGame.hidden = true;
+            quizResultPanel.hidden = false;
+            document.getElementById("quiz-result").textContent = quizPlayer + ", obtuviste " + quizScore + " de " + hygieneQuestions.length + " puntos.";
+            updateLeaderboard();
+        });
+
+        document.getElementById("quiz-restart").addEventListener("click", function () {
+            quizResultPanel.hidden = true;
+            quizStart.hidden = false;
+            document.getElementById("quiz-name").focus();
+        });
+        updateLeaderboard();
+
+        document.getElementById("contact-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var form = new FormData(event.currentTarget);
+            var subject = "Consulta web: " + form.get("motivo");
+            var body = [
+                "Nombre: " + form.get("nombre"),
+                "Relación con el plantel: " + form.get("relacion"),
+                "Correo para responder: " + (form.get("correo") || "No indicado"),
+                "Motivo: " + form.get("motivo"),
+                "",
+                "Mensaje:",
+                form.get("mensaje")
+            ].join("\n");
+            var gmailUrl = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encodeURIComponent("liceocolinas@gmail.com") + "&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+            window.location.href = gmailUrl;
+        });
+    </script>
+
+</body>
+</html>
